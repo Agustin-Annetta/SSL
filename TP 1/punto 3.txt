@@ -1,0 +1,65 @@
+1) Las variables en bash, de manera análoga que ocurre con los lenguajes de programación, son alias que permiten almacenar de manera temporal diversos datos tanto del sistema como los que podamos definir nosotros.
+Son muy utilizadas en el scripting de series de comandos, debido a que facilitan enormemente la escritura de los mismos, así como su entendibilidad. Como se mencionó anteriormente, existen variables que son propias del sistema operativo, tales como $HOME o $PATH, pero somos libres de poder definir todas las que necesitemos.
+
+Algunos ejemplos utilizando variables podrían ser:
+
+~ echo $HOME
+/home/user
+
+Para poder definir una variable propia en la terminal bash, debemos hacerlo de la siguiente manera:
+
+~ export NUM=4
+~ echo $NUM
+4
+
+Es importante aclarar, que no es necesario utilizar el comando "export" para declarar variables si se las utiliza exclusivamente dentro de un script bash.
+
+
+2) Siguiendo con las analogías a los lenguajes de programación, también existen sentencias condicionales para el scripting de bash, de modo tal que se pueden realizar diferentes procesos, dependiendo de los parámetros que definamos en un principio.
+Un ejemplo de esto podría ser:
+
+numero1=3
+numero2=4
+
+if [ "$numero1" -eq "$numero2" ]; then
+    echo "Las variables son iguales."
+elif [ "$numero1" -lt "$numero2" ]; then
+    echo "numero1 es menor que numero2."
+else
+    echo "numero1 es mayor que numero2."
+fi
+
+
+
+Siendo los operadores lógicos "-eq" y "-lt" los análogos a "==" y "<" en otros lenguajes de programación, tales como c.
+
+
+3) También es posible realizar sentencias cíclicas (bucles) en bash, lo que nos permite automatizar tareas que puedan volverse repetitivas, o que puedan repetirse de manera indefinida. 
+Para hacer esto, existen los bucles while y for, como en cualquier otro lenguaje.
+
+Algunos ejemplos de esto son:
+
+CONTADOR=0
+while [  $CONTADOR -lt 10 ]; do
+  echo El contador es $CONTADOR
+  CONTADOR=$(($CONTADOR+1))
+done
+
+
+for i in $( ls ); 
+do
+  echo item: $i
+done
+
+
+4) Los subprogramas en bash son una forma de escribir "funciones de comandos". Esto resulta muy util a la hora de crear scripts de grandes extensiones, ya que nos ayuda a evitar una repetición inecesaria de código. 
+Por ejemplo:
+
+sumar() {
+    local resultado=$(( $1 + $2 ))
+    echo $resultado
+}
+
+resul=$(sumar 10 5)
+echo "La suma es: $resul"
+
